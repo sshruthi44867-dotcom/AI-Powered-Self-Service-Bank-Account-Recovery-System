@@ -1,0 +1,1664 @@
+/* ==========================================
+   SMARTBANK AI - DARK PURPLE DASHBOARD
+========================================== */
+
+:root {
+    --bg: #0b0d19;
+    --sidebar: #111326;
+    --surface: #171a30;
+    --surface2: #1d2039;
+    --primary: #8b5cf6;
+    --primary-light: #a78bfa;
+    --text: #f4f2ff;
+    --muted: #969bb7;
+    --border: #2b2e49;
+    --green: #34d399;
+    --blue: #60a5fa;
+    --shadow: 0 10px 35px rgba(0,0,0,0.18);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    transition: background 0.3s, color 0.3s;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+button, input, select {
+    font-family: inherit;
+}
+
+/* MAIN LAYOUT */
+
+.app-layout {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* SIDEBAR */
+
+.sidebar {
+    width: 255px;
+    min-width: 255px;
+    height: 100vh;
+    position: sticky;
+    top: 0;
+    background: var(--sidebar);
+    border-right: 1px solid var(--border);
+    padding: 28px 18px;
+    display: flex;
+    flex-direction: column;
+    z-index: 100;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 5px 8px 35px;
+}
+
+.brand-icon {
+    width: 45px;
+    height: 45px;
+    border-radius: 13px;
+    background: linear-gradient(135deg, #7c3aed, #a78bfa);
+    display: grid;
+    place-items: center;
+    font-size: 23px;
+}
+
+.brand h2 {
+    font-size: 18px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+}
+
+.brand h2 span {
+    color: var(--primary-light);
+}
+
+.brand small {
+    color: var(--muted);
+    font-size: 11px;
+}
+
+.nav-label {
+    color: #747b9c;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    padding: 0 12px;
+    margin-bottom: 15px;
+}
+
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.nav-link {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    padding: 13px 14px;
+    border-radius: 10px;
+    color: var(--muted);
+    font-size: 13px;
+    font-weight: 600;
+    transition: 0.25s;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    background: linear-gradient(100deg, rgba(139,92,246,0.25), rgba(139,92,246,0.06));
+    color: var(--primary-light);
+}
+
+.sidebar-bottom {
+    margin-top: auto;
+}
+
+.support-card {
+    padding: 17px;
+    background: linear-gradient(145deg, #30205d, #1c1b3a);
+    border: 1px solid #513b85;
+    border-radius: 13px;
+}
+
+.support-card > div {
+    font-size: 25px;
+    margin-bottom: 8px;
+}
+
+.support-card h4 {
+    font-size: 13px;
+}
+
+.support-card p {
+    font-size: 11px;
+    color: #b5aed0;
+    margin: 6px 0 12px;
+}
+
+.support-card a {
+    font-size: 11px;
+    color: #c4b5fd;
+    font-weight: 700;
+}
+
+.sidebar-footer {
+    color: #737995;
+    font-size: 10px;
+    text-align: center;
+    margin-top: 22px;
+}
+
+/* MAIN CONTENT */
+
+.main-content {
+    flex: 1;
+    min-width: 0;
+    padding: 0 35px;
+}
+
+/* TOPBAR */
+
+.topbar {
+    min-height: 95px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 28px;
+}
+
+.top-label,
+.eyebrow {
+    color: var(--primary-light);
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    margin-bottom: 6px;
+}
+
+.topbar h3 {
+    font-size: 19px;
+}
+
+.top-actions {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.secure-label {
+    color: var(--green);
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.profile-avatar {
+    width: 39px;
+    height: 39px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: linear-gradient(135deg, #7c3aed, #a78bfa);
+    font-size: 12px;
+    font-weight: 800;
+}
+
+.theme-button {
+    padding: 9px 13px;
+    font-size: 11px;
+}
+
+/* BUTTONS */
+
+button,
+.primary-link {
+    display: inline-block;
+    background: linear-gradient(135deg, #7c3aed, #9b6cff);
+    color: white;
+    border: none;
+    padding: 11px 17px;
+    border-radius: 9px;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.25s;
+}
+
+button:hover,
+.primary-link:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 7px 20px rgba(139,92,246,0.25);
+}
+
+.text-button {
+    background: transparent;
+    color: var(--primary-light);
+    padding: 7px 0;
+    box-shadow: none;
+}
+
+.full-button {
+    width: 100%;
+    margin: 8px 0;
+}
+
+/* WELCOME SECTION */
+
+.welcome-section {
+    min-height: 260px;
+    border-radius: 18px;
+    padding: 40px;
+    background:
+        radial-gradient(circle at 85% 30%, rgba(167,139,250,0.27), transparent 30%),
+        linear-gradient(115deg, #21163f, #342064 65%, #4b2880);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+    scroll-margin-top: 25px;
+}
+
+.welcome-tag {
+    color: #c4b5fd;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+}
+
+.welcome-section h1 {
+    font-size: clamp(30px, 4vw, 43px);
+    font-weight: 800;
+    line-height: 1.2;
+}
+
+.welcome-section h1 span {
+    color: #c4b5fd;
+}
+
+.welcome-section p:not(.welcome-tag) {
+    color: #d2c9e9;
+    font-size: 13px;
+    margin: 14px 0 23px;
+}
+
+.primary-link {
+    font-size: 12px;
+}
+
+.welcome-art {
+    font-size: 115px;
+    opacity: 0.9;
+    filter: drop-shadow(0 10px 20px rgba(0,0,0,0.2));
+    padding-right: 35px;
+}
+
+/* SECTIONS */
+
+.content-section {
+    padding: 42px 0 15px;
+    scroll-margin-top: 20px;
+}
+
+.section-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 23px;
+}
+
+.section-heading h2,
+.about-panel h2,
+.contact-panel h2 {
+    font-size: 24px;
+    font-weight: 800;
+}
+
+.section-heading p:not(.eyebrow) {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 5px;
+}
+
+.status-pill {
+    color: var(--green);
+    background: rgba(52,211,153,0.1);
+    border: 1px solid rgba(52,211,153,0.2);
+    padding: 8px 13px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+/* DASHBOARD GRID */
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 17px;
+}
+
+.balance-card {
+    grid-column: span 2;
+    min-height: 190px;
+    padding: 25px;
+    border-radius: 15px;
+    background: linear-gradient(130deg, #6335b7, #8b5cf6, #a477f5);
+    box-shadow: 0 10px 30px rgba(139,92,246,0.18);
+}
+
+.card-top {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: #eee7ff;
+}
+
+.card-top span:last-child {
+    font-size: 22px;
+}
+
+.balance-card h1 {
+    font-size: 34px;
+    margin: 13px 0 0;
+    font-weight: 800;
+}
+
+.balance-card > p {
+    font-size: 11px;
+    color: #e7dcff;
+}
+
+.card-bottom {
+    border-top: 1px solid rgba(255,255,255,0.2);
+    padding-top: 12px;
+    margin-top: 18px;
+    font-size: 10px;
+    color: #e9ddff;
+}
+
+.overview-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 15px;
+    padding: 20px;
+    min-height: 190px;
+    transition: 0.25s;
+}
+
+.overview-card:hover {
+    border-color: var(--primary);
+    transform: translateY(-4px);
+}
+
+.overview-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 11px;
+    display: grid;
+    place-items: center;
+    font-size: 19px;
+    margin-bottom: 16px;
+}
+
+.purple {
+    background: rgba(139,92,246,0.15);
+}
+
+.green {
+    background: rgba(52,211,153,0.12);
+}
+
+.blue {
+    background: rgba(96,165,250,0.12);
+}
+
+.overview-card p {
+    font-size: 11px;
+    color: var(--muted);
+}
+
+.overview-card h3 {
+    font-size: 18px;
+    margin: 5px 0;
+}
+
+.overview-card small {
+    font-size: 10px;
+    color: var(--muted);
+}
+
+/* PANELS */
+
+.panel {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 23px;
+    border-radius: 14px;
+    box-shadow: var(--shadow);
+    transition: 0.25s;
+    min-width: 0;
+}
+
+.panel:hover {
+    border-color: rgba(139,92,246,0.45);
+}
+
+.panel h3 {
+    font-size: 15px;
+    margin-bottom: 12px;
+}
+
+.panel p {
+    font-size: 12px;
+    color: var(--muted);
+    margin: 7px 0;
+}
+
+.security-panel {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    margin-top: 22px;
+}
+
+.security-panel h3 {
+    margin: 0 0 6px;
+}
+
+.security-panel p:not(.eyebrow) {
+    color: var(--green);
+}
+
+/* LOGIN */
+
+.login-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+    max-width: 900px;
+}
+
+.login-box,
+.bank-panel {
+    min-width: 0;
+}
+
+.login-box h3,
+.bank-panel h3 {
+    font-size: 17px;
+}
+
+.login-box hr {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 20px 0;
+}
+
+.security-note {
+    background: rgba(52,211,153,0.08);
+    border: 1px solid rgba(52,211,153,0.2);
+    padding: 13px;
+    border-radius: 9px;
+    font-size: 11px;
+    color: var(--green);
+    margin-top: 22px;
+}
+
+/* INPUTS */
+
+input,
+select {
+    width: 100%;
+    padding: 12px 13px;
+    margin: 8px 0;
+    background: #101326;
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 12px;
+    outline: none;
+    transition: 0.2s;
+}
+
+input:focus,
+select:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(139,92,246,0.12);
+}
+
+input::placeholder {
+    color: #747b99;
+}
+
+select option {
+    background: #171a30;
+    color: white;
+}
+
+/* SERVICES */
+
+.service-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 17px;
+}
+
+.service {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 22px;
+    border-radius: 13px;
+    min-width: 0;
+    transition: 0.25s;
+}
+
+.service:hover {
+    transform: translateY(-4px);
+    border-color: var(--primary);
+    box-shadow: var(--shadow);
+}
+
+.service-icon {
+    width: 43px;
+    height: 43px;
+    display: grid;
+    place-items: center;
+    background: rgba(139,92,246,0.14);
+    border-radius: 11px;
+    font-size: 21px;
+    margin-bottom: 14px;
+}
+
+.service h3 {
+    font-size: 14px;
+    margin-bottom: 7px;
+}
+
+.service p {
+    color: var(--muted);
+    font-size: 11px;
+    margin-bottom: 10px;
+}
+
+.form-heading {
+    margin-top: 45px;
+}
+
+.service .panel {
+    height: 100%;
+}
+
+/* TRANSACTIONS */
+
+.transaction-panel {
+    max-width: 650px;
+}
+
+.transaction-panel button {
+    margin-top: 12px;
+}
+
+/* ABOUT AND CONTACT */
+
+.about-panel,
+.contact-panel {
+    text-align: center;
+    padding: 45px 25px;
+}
+
+.about-panel > p:not(.eyebrow),
+.contact-panel > p:not(.eyebrow) {
+    max-width: 650px;
+    margin: 15px auto;
+    line-height: 1.9;
+}
+
+.about-highlight {
+    display: inline-block;
+    margin-top: 18px;
+    padding: 12px 18px;
+    border-radius: 10px;
+    background: rgba(139,92,246,0.12);
+    color: var(--primary-light);
+    font-size: 12px;
+}
+
+/* RESULT MESSAGES */
+
+#loginMessage,
+#resetMessage,
+#fingerprintMessage,
+#bankMessage,
+#cardMessage,
+#addressMessage,
+#pinMessage,
+#transferMessage,
+#accountMessage,
+#kycMessage,
+#mobileMessage,
+#chatAnswer {
+    color: var(--primary-light);
+    font-size: 12px;
+    font-weight: 600;
+    overflow-wrap: anywhere;
+}
+
+#statementResult,
+#receiptResult,
+#notificationMessage,
+#transactionHistory {
+    margin-top: 14px;
+    overflow-wrap: anywhere;
+}
+
+/* FOOTER */
+
+footer {
+    margin-top: 45px;
+    border-top: 1px solid var(--border);
+    padding: 23px 5px;
+    text-align: center;
+    color: var(--muted);
+    font-size: 11px;
+}
+
+footer p + p {
+    margin-top: 5px;
+}
+
+/* LIGHT MODE */
+
+body.light-mode {
+    --bg: #f4f3fa;
+    --sidebar: #ffffff;
+    --surface: #ffffff;
+    --surface2: #f5f3ff;
+    --text: #22213b;
+    --muted: #73748c;
+    --border: #e5e2ef;
+    --shadow: 0 8px 25px rgba(45,35,90,0.07);
+}
+
+body.light-mode input,
+body.light-mode select {
+    background: #faf9ff;
+    color: #22213b;
+}
+
+body.light-mode .sidebar {
+    box-shadow: 3px 0 15px rgba(0,0,0,0.03);
+}
+
+body.light-mode .nav-link {
+    color: #686783;
+}
+
+body.light-mode .nav-link:hover,
+body.light-mode .nav-link.active {
+    color: #7143d8;
+    background: #f0eaff;
+}
+
+body.light-mode .support-card {
+    background: linear-gradient(145deg, #eee6ff, #f7f3ff);
+    border-color: #d9caff;
+}
+
+body.light-mode .support-card p {
+    color: #6e6190;
+}
+
+body.light-mode .support-card h4 {
+    color: #35245e;
+}
+
+body.light-mode .support-card a {
+    color: #7143d8;
+}
+
+body.light-mode .security-note {
+    color: #16845d;
+}
+
+body.light-mode .overview-icon {
+    color: #7143d8;
+}
+
+/* RESPONSIVE - TABLET */
+
+@media (max-width: 1100px) {
+
+    .sidebar {
+        width: 215px;
+        min-width: 215px;
+    }
+
+    .main-content {
+        padding: 0 22px;
+    }
+
+    .dashboard-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .service-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+/* RESPONSIVE - MOBILE */
+
+@media (max-width: 700px) {
+
+    .app-layout {
+        display: block;
+    }
+
+    .sidebar {
+        width: 100%;
+        min-width: 0;
+        height: auto;
+        position: relative;
+        padding: 15px;
+    }
+
+    .brand {
+        padding: 5px 5px 15px;
+    }
+
+    .nav-label,
+    .sidebar-bottom {
+        display: none;
+    }
+
+    .sidebar-nav {
+        flex-direction: row;
+        overflow-x: auto;
+        gap: 7px;
+        padding-bottom: 5px;
+    }
+
+    .nav-link {
+        flex-shrink: 0;
+        padding: 10px 12px;
+        font-size: 11px;
+    }
+
+    .main-content {
+        padding: 0 15px;
+    }
+
+    .topbar {
+        min-height: 85px;
+        flex-wrap: wrap;
+        padding: 15px 0;
+    }
+
+    .topbar h3 {
+        font-size: 15px;
+    }
+
+    .top-actions {
+        gap: 8px;
+    }
+
+    .secure-label {
+        display: none;
+    }
+
+    .theme-button {
+        padding: 8px;
+        font-size: 10px;
+    }
+
+    .profile-avatar {
+        width: 34px;
+        height: 34px;
+    }
+
+    .welcome-section {
+        min-height: 240px;
+        padding: 27px 20px;
+    }
+
+    .welcome-section h1 {
+        font-size: 29px;
+    }
+
+    .welcome-section p:not(.welcome-tag) {
+        font-size: 11px;
+    }
+
+    .welcome-art {
+        font-size: 65px;
+        padding: 0;
+    }
+
+    .dashboard-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+    }
+
+    .balance-card {
+        grid-column: span 2;
+    }
+
+    .overview-card {
+        padding: 14px;
+        min-height: 150px;
+    }
+
+    .overview-card h3 {
+        font-size: 15px;
+    }
+
+    .service-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .login-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .section-heading h2 {
+        font-size: 21px;
+    }
+
+    .security-panel {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .content-section {
+        padding-top: 32px;
+    }
+}
+
+/* SMALL MOBILE */
+
+@media (max-width: 380px) {
+
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .balance-card {
+        grid-column: span 1;
+    }
+
+    .welcome-art {
+        font-size: 45px;
+    }
+
+    .topbar h3 {
+        font-size: 13px;
+    }
+
+    .theme-button {
+        font-size: 9px;
+    }
+}
+html {
+    scroll-behavior: smooth;
+}
+
+.content-section,
+.welcome-section {
+    display: block;
+    scroll-margin-top: 30px;
+}
+
+/* SINGLE PAGE NAVIGATION */
+
+.main-content > section {
+    display: none;
+}
+
+.main-content > #home {
+    display: block;
+}
+
+/* ==================================
+   SMARTBANK AI - DARK FORM THEME
+================================== */
+
+/* Dynamic Banking Pages */
+main.main-content [id$="Page"],
+main.main-content [id$="Page"] .panel,
+main.main-content [id$="Page"] .form-card,
+main.main-content [id$="Page"] .form-container,
+main.main-content [id$="Page"] .application-form {
+    background: #17172b !important;
+    color: #f1efff !important;
+    border: 1px solid #38305c !important;
+    border-radius: 18px !important;
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.35) !important;
+}
+
+/* Form Headings */
+main.main-content [id$="Page"] h1,
+main.main-content [id$="Page"] h2,
+main.main-content [id$="Page"] h3,
+main.main-content [id$="Page"] p,
+main.main-content [id$="Page"] label {
+    color: #f1efff !important;
+}
+
+/* Input Fields */
+main.main-content [id$="Page"] input,
+main.main-content [id$="Page"] select,
+main.main-content [id$="Page"] textarea {
+    background: #101124 !important;
+    color: #ffffff !important;
+    border: 1px solid #45406b !important;
+    border-radius: 10px !important;
+    padding: 13px !important;
+    outline: none;
+}
+
+/* Input Focus */
+main.main-content [id$="Page"] input:focus,
+main.main-content [id$="Page"] select:focus,
+main.main-content [id$="Page"] textarea:focus {
+    border-color: #9857ff !important;
+    box-shadow: 0 0 0 3px rgba(152, 87, 255, 0.18) !important;
+}
+
+/* Buttons */
+main.main-content [id$="Page"] button {
+    background: linear-gradient(135deg, #7938ef, #a15cff) !important;
+    color: #ffffff !important;
+    border: none !important;
+    border-radius: 10px !important;
+    padding: 12px 20px !important;
+    font-weight: 700 !important;
+    cursor: pointer;
+}
+
+/* Button Hover */
+main.main-content [id$="Page"] button:hover {
+    background: linear-gradient(135deg, #6825db, #8b42ef) !important;
+    transform: translateY(-2px);
+}
+
+/* Placeholder */
+main.main-content [id$="Page"] input::placeholder,
+main.main-content [id$="Page"] textarea::placeholder {
+    color: #9994b5 !important;
+}
+
+/* Select Options */
+main.main-content [id$="Page"] option {
+    background: #17172b !important;
+    color: #ffffff !important;
+}
+
+/* SMARTBANK AI - FORCE DARK ADDRESS PAGE */
+
+body #addressPage,
+body #addressPage .panel,
+body #addressPage .form-card,
+body #addressPage .form-container,
+body #addressPage form,
+body #addressPage > div {
+    background: #17172b !important;
+    background-color: #17172b !important;
+    color: #f2efff !important;
+    border-color: #393158 !important;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.3) !important;
+}
+
+/* All address form text */
+body #addressPage h1,
+body #addressPage h2,
+body #addressPage h3,
+body #addressPage p,
+body #addressPage label,
+body #addressPage span {
+    color: #f2efff !important;
+}
+
+/* Form fields */
+body #addressPage input,
+body #addressPage textarea,
+body #addressPage select {
+    background: #101124 !important;
+    background-color: #101124 !important;
+    color: #ffffff !important;
+    border: 1px solid #514477 !important;
+    border-radius: 10px !important;
+}
+
+/* Buttons */
+body #addressPage button {
+    background: #8848f5 !important;
+    color: #ffffff !important;
+    border: none !important;
+    border-radius: 10px !important;
+}
+
+/* Placeholder */
+body #addressPage input::placeholder,
+body #addressPage textarea::placeholder {
+    color: #aaa3c4 !important;
+}
+
+/* ==========================================
+   SMARTBANK AI - COMPLETE GLOBAL DARK THEME
+========================================== */
+
+:root {
+    --bg-main: #0b0b18;
+    --bg-sidebar: #111124;
+    --bg-card: #17172d;
+    --bg-input: #101124;
+    --border-purple: #39315c;
+    --purple: #8848f5;
+    --purple-light: #a66bff;
+    --text-main: #f2efff;
+    --text-muted: #aaa3c5;
+}
+
+/* MAIN BACKGROUND */
+html,
+body,
+.app-layout,
+.main-content {
+    background: var(--bg-main) !important;
+    color: var(--text-main) !important;
+}
+
+/* SIDEBAR */
+.sidebar {
+    background: var(--bg-sidebar) !important;
+    color: var(--text-main) !important;
+    border-color: var(--border-purple) !important;
+}
+
+/* ALL MAIN SECTIONS */
+.main-content section,
+.main-content .content-section {
+    background-color: transparent !important;
+    color: var(--text-main) !important;
+}
+
+/* ALL CARDS AND PANELS */
+.main-content .panel,
+.main-content .service,
+.main-content .overview-card,
+.main-content .security-panel,
+.main-content .balance-card,
+.main-content .application-center,
+.main-content .login-box,
+.main-content .bank-panel,
+.main-content .transaction-panel,
+.main-content .about-panel,
+.main-content .contact-panel,
+.main-content .support-card,
+.main-content [class*="form-card"],
+.main-content [class*="form-container"],
+.main-content [class*="application-card"],
+.main-content [class*="request-card"],
+body [id$="Page"],
+body [id$="Page"] > div,
+body [id$="Page"] .panel,
+body [id$="Page"] form,
+body [id$="Page"] [class*="card"],
+body [id$="Page"] [class*="form"],
+body [id$="Page"] [style*="background"] {
+    background: var(--bg-card) !important;
+    background-color: var(--bg-card) !important;
+    color: var(--text-main) !important;
+    border-color: var(--border-purple) !important;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.25) !important;
+}
+
+/* ALL HEADINGS */
+.main-content h1,
+.main-content h2,
+.main-content h3,
+.main-content h4,
+.main-content p,
+.main-content label,
+.main-content small,
+body [id$="Page"] h1,
+body [id$="Page"] h2,
+body [id$="Page"] h3,
+body [id$="Page"] p,
+body [id$="Page"] label {
+    color: var(--text-main) !important;
+}
+
+/* ALL INPUTS */
+.main-content input,
+.main-content textarea,
+.main-content select,
+body [id$="Page"] input,
+body [id$="Page"] textarea,
+body [id$="Page"] select {
+    background: var(--bg-input) !important;
+    background-color: var(--bg-input) !important;
+    color: #ffffff !important;
+    border: 1px solid #49416d !important;
+    border-radius: 10px !important;
+    padding: 12px !important;
+}
+
+/* INPUT FOCUS */
+.main-content input:focus,
+.main-content textarea:focus,
+.main-content select:focus,
+body [id$="Page"] input:focus,
+body [id$="Page"] textarea:focus,
+body [id$="Page"] select:focus {
+    outline: none !important;
+    border-color: var(--purple-light) !important;
+    box-shadow: 0 0 0 3px rgba(136,72,245,0.2) !important;
+}
+
+/* PLACEHOLDER */
+.main-content input::placeholder,
+.main-content textarea::placeholder,
+body [id$="Page"] input::placeholder,
+body [id$="Page"] textarea::placeholder {
+    color: var(--text-muted) !important;
+}
+
+/* ALL BUTTONS */
+.main-content button,
+body [id$="Page"] button {
+    background: linear-gradient(
+        135deg,
+        #7839e9,
+        #a15cff
+    ) !important;
+
+    color: #ffffff !important;
+    border: none !important;
+    border-radius: 10px !important;
+    font-weight: 700 !important;
+    cursor: pointer;
+}
+
+/* BUTTON HOVER */
+.main-content button:hover,
+body [id$="Page"] button:hover {
+    background: linear-gradient(
+        135deg,
+        #6428d4,
+        #9148f5
+    ) !important;
+
+    transform: translateY(-2px);
+}
+
+/* SELECT OPTIONS */
+.main-content option,
+body [id$="Page"] option {
+    background: #17172d !important;
+    color: #ffffff !important;
+}
+
+/* TABLES */
+.main-content table,
+.main-content tr,
+.main-content td,
+.main-content th,
+body [id$="Page"] table,
+body [id$="Page"] tr,
+body [id$="Page"] td,
+body [id$="Page"] th {
+    background: #17172d !important;
+    color: var(--text-main) !important;
+    border-color: var(--border-purple) !important;
+}
+
+/* HEADER */
+.topbar {
+    background: var(--bg-main) !important;
+    color: var(--text-main) !important;
+    border-color: var(--border-purple) !important;
+}
+
+/* FOOTER */
+footer {
+    background: var(--bg-main) !important;
+    color: var(--text-muted) !important;
+}
+
+/* DIVIDERS */
+hr,
+.divider {
+    border-color: var(--border-purple) !important;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .main-content .panel,
+    body [id$="Page"] {
+        border-radius: 14px !important;
+    }
+
+    .main-content input,
+    .main-content select,
+    .main-content textarea {
+        width: 100%;
+        box-sizing: border-box;
+    }
+}
+
+/* CLICKABLE BANKING SERVICE CARDS */
+
+#services .service {
+    cursor: pointer !important;
+    position: relative;
+    transition: 0.3s ease;
+    border: 1px solid #39315c;
+    background: #17172d;
+}
+
+#services .service:hover {
+    transform: translateY(-6px);
+    border-color: #995cff;
+    background: #211b3d !important;
+    box-shadow: 0 8px 25px rgba(136,72,245,0.2);
+}
+
+#services .service:focus {
+    outline: 2px solid #a66bff;
+    outline-offset: 3px;
+}
+
+/* INDIVIDUAL SERVICE PAGE DESIGN */
+
+.individual-service-page {
+    max-width: 850px;
+    margin: 45px auto !important;
+    padding: 30px !important;
+    background: #17172d !important;
+    color: #f2efff !important;
+    border: 1px solid #49366e !important;
+    border-radius: 18px !important;
+}
+
+.individual-service-page h2,
+.individual-service-page p,
+.individual-service-page label {
+    color: #f2efff !important;
+}
+
+.individual-service-page label {
+    display: block;
+    margin-top: 18px;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+.individual-service-page input,
+.individual-service-page select,
+.individual-service-page textarea {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 13px;
+    margin-bottom: 12px;
+    color: white !important;
+    background: #101124 !important;
+    border: 1px solid #49366e !important;
+    border-radius: 9px;
+}
+
+.individual-service-page button {
+    padding: 12px 20px;
+    margin-top: 12px;
+    border: none;
+    border-radius: 9px;
+    background: linear-gradient(135deg, #7839e9, #a15cff);
+    color: white;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.individual-service-page .service-result {
+    margin-top: 20px;
+    color: #b9a0ff !important;
+    overflow-wrap: anywhere;
+}
+
+@media(max-width: 768px) {
+    .individual-service-page {
+        margin: 20px 10px !important;
+        padding: 20px !important;
+    }
+}
+
+/* =========================================
+   SMARTBANK AI - ALL PAGES DARK THEME FIX
+========================================= */
+
+:root {
+    color-scheme: dark;
+    --main-bg: #0b0b18;
+    --sidebar-bg: #111124;
+    --card-bg: #17172d;
+    --input-bg: #101124;
+    --border-color: #39315c;
+    --purple: #8848f5;
+    --text-color: #eeeaff;
+    --muted-color: #aaa3c5;
+}
+
+/* ALL PAGE BACKGROUNDS */
+html,
+body,
+.app-layout,
+.sidebar,
+.main-content,
+.main-content section,
+.content-section {
+    background-color: var(--main-bg) !important;
+    color: var(--text-color) !important;
+}
+
+/* SIDEBAR */
+.sidebar {
+    background: var(--sidebar-bg) !important;
+    border-right: 1px solid var(--border-color) !important;
+}
+
+/* ALL CARDS */
+.panel,
+.service,
+.overview-card,
+.balance-card,
+.security-panel,
+.application-center,
+.support-card,
+.login-box,
+.bank-panel,
+.transaction-panel,
+.individual-service-page,
+[id$="Page"] .panel,
+[id$="Page"] form {
+    background: var(--card-bg) !important;
+    color: var(--text-color) !important;
+    border: 1px solid var(--border-color) !important;
+}
+
+/* ALL INPUTS - REGISTER, LOGIN, DASHBOARD, FORMS */
+body input,
+body textarea,
+body select,
+body [id$="Page"] input,
+body [id$="Page"] textarea,
+body [id$="Page"] select {
+    background: var(--input-bg) !important;
+    background-color: var(--input-bg) !important;
+    color: #ffffff !important;
+    border: 1px solid #49416d !important;
+    border-radius: 10px !important;
+    padding: 13px !important;
+    box-shadow: none !important;
+    outline: none;
+}
+
+/* BROWSER AUTOFILL - REGISTER PAGE */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+select:-webkit-autofill {
+    -webkit-text-fill-color: #ffffff !important;
+    -webkit-box-shadow: 0 0 0 1000px #101124 inset !important;
+    transition: background-color 9999s ease-in-out 0s;
+}
+
+/* INPUT FOCUS */
+body input:focus,
+body textarea:focus,
+body select:focus {
+    border-color: #a66bff !important;
+    box-shadow: 0 0 0 3px rgba(136,72,245,0.15) !important;
+}
+
+/* PLACEHOLDER */
+body input::placeholder,
+body textarea::placeholder {
+    color: #aaa3c5 !important;
+    opacity: 1 !important;
+}
+
+/* ALL TEXT */
+body h1,
+body h2,
+body h3,
+body h4,
+body p,
+body label,
+body small,
+body span {
+    color: var(--text-color);
+}
+
+/* ALL BUTTONS */
+body button {
+    background: linear-gradient(135deg, #7839e9, #a15cff) !important;
+    color: white !important;
+    border: none !important;
+    border-radius: 9px !important;
+}
+
+/* ALL SELECT OPTIONS */
+body option {
+    background: #17172d !important;
+    color: white !important;
+}
+
+/* ALL NAVIGATION LINKS */
+.sidebar-nav a,
+.sidebar a {
+    color: #aaa3c5 !important;
+}
+
+.sidebar-nav a:hover,
+.sidebar-nav a.active {
+    background: #211b3d !important;
+    color: #b78aff !important;
+}
+
+/* TOPBAR */
+.topbar {
+    background: var(--main-bg) !important;
+    color: white !important;
+    border-color: var(--border-color) !important;
+}
+
+/* FOOTER */
+footer {
+    background: var(--main-bg) !important;
+    color: var(--muted-color) !important;
+}
+
+/* TABLES */
+table,
+tr,
+td,
+th {
+    background: var(--card-bg) !important;
+    color: var(--text-color) !important;
+    border-color: var(--border-color) !important;
+}
+
+/* MOBILE */
+@media(max-width: 768px) {
+    body input,
+    body select,
+    body textarea {
+        width: 100%;
+        box-sizing: border-box;
+    }
+}
+
+/* Dashboard card interaction */
+#dashboard .dashboard-grid > * {
+    cursor: pointer;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+#dashboard .dashboard-grid > *:hover {
+    transform: translateY(-4px);
+    border-color: #9255ff;
+}
+
+.dashboard-detail-page {
+    max-width: 900px;
+    margin: 35px auto;
+    padding: 30px;
+    background: #171629 !important;
+    color: #e5e1f5 !important;
+    border: 1px solid #39315e;
+    border-radius: 16px;
+}
+
+.dashboard-detail-page h2,
+.dashboard-detail-page h3,
+.dashboard-detail-page p,
+.dashboard-detail-page label {
+    color: #e5e1f5 !important;
+}
+
+.dashboard-detail-page input,
+.dashboard-detail-page select {
+    width: 100%;
+    margin: 10px 0;
+    padding: 14px;
+    background: #100f20 !important;
+    color: #eeeaff !important;
+    border: 1px solid #49406d;
+    border-radius: 9px;
+}
+
+.dashboard-detail-page button {
+    margin: 8px 5px 8px 0;
+    padding: 12px 20px;
+    background: linear-gradient(90deg, #7939ed, #a04cff);
+    color: white;
+    border: none;
+    border-radius: 9px;
+    cursor: pointer;
+}
+style
+:root {
+    --bg: #090914;
+    --sidebar: #111126;
+    --card: #19182f;
+    --card2: #201d3b;
+    --border: #39345e;
+    --text: #f1efff;
+    --muted: #aaa5cc;
+    --purple: #853cf3;
+    --purple2: #a65cff;
+    --input: #101023;
+}
+
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    font-family: Inter, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+}
+/* DARK LOGIN INPUT BOX */
+
+input,
+textarea,
+select {
+    background-color: #24243b !important;
+    color: #ffffff !important;
+    border: 1px solid #454563 !important;
+    outline: none;
+}
+
+input::placeholder,
+textarea::placeholder {
+    color: #a5a5bd !important;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+    background-color: #24243b !important;
+    border-color: #8b7cff !important;
+    box-shadow: 0 0 8px rgba(139, 124, 255, 0.2);
+}
+
+/* REMOVE CHROME AUTOFILL BRIGHT COLOR */
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus {
+    -webkit-text-fill-color: #ffffff !important;
+    -webkit-box-shadow: 0 0 0 1000px #24243b inset !important;
+    transition: background-color 5000s ease-in-out 0s;
+}
+/* FIX LOGIN USERNAME & PASSWORD BACKGROUND */
+
+#username,
+#password,
+.login-box input,
+#login input {
+    background: #1b1b30 !important;
+    background-color: #1b1b30 !important;
+    color: white !important;
+    border: 1px solid #555575 !important;
+    caret-color: white !important;
+}
+
+/* CHROME AUTOFILL FIX */
+
+#username:-webkit-autofill,
+#password:-webkit-autofill,
+#username:-webkit-autofill:hover,
+#password:-webkit-autofill:hover,
+#username:-webkit-autofill:focus,
+#password:-webkit-autofill:focus {
+    -webkit-text-fill-color: white !important;
+    -webkit-box-shadow: 0 0 0 1000px #1b1b30 inset !important;
+    box-shadow: 0 0 0 1000px #1b1b30 inset !important;
+    background-color: #1b1b30 !important;
+    transition: background-color 99999s ease-out;
+}
+
+#username::placeholder,
+#password::placeholder {
+    color: #bbbbcc !important;
+}

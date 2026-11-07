@@ -1,0 +1,749 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SmartBank AI | Digital Banking</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+:root {
+    --bg: #090914;
+    --sidebar: #111126;
+    --card: #19182f;
+    --card2: #201d3b;
+    --border: #39345e;
+    --text: #f1efff;
+    --muted: #aaa5cc;
+    --purple: #853cf3;
+    --purple2: #a65cff;
+}
+
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    font-family: Inter, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+}
+
+.app-layout {
+    display: flex;
+    min-height: 100vh;
+}
+
+.sidebar {
+    width: 265px;
+    background: var(--sidebar);
+    border-right: 1px solid var(--border);
+    padding: 25px 20px;
+    position: fixed;
+    height: 100vh;
+    overflow-y: auto;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 45px;
+}
+
+.brand-icon {
+    font-size: 30px;
+    background: var(--purple);
+    padding: 12px;
+    border-radius: 15px;
+}
+
+.brand h2 { font-size: 18px; }
+.brand span { color: var(--purple2); }
+
+.sidebar-nav {
+    display: grid;
+    gap: 9px;
+}
+
+.nav-link {
+    display: block;
+    padding: 14px;
+    color: var(--muted);
+    text-decoration: none;
+    border-radius: 12px;
+    font-size: 14px;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    color: white;
+    background: var(--card2);
+}
+
+.support-card {
+    background: var(--card2);
+    padding: 17px;
+    border-radius: 15px;
+    margin-top: 40px;
+}
+
+.support-card p,
+.sidebar-footer {
+    color: var(--muted);
+}
+
+.main-content {
+    margin-left: 265px;
+    width: calc(100% - 265px);
+    padding: 28px 38px;
+}
+
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 22px;
+    margin-bottom: 30px;
+}
+
+.top-actions {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.profile-avatar {
+    background: var(--purple);
+    border-radius: 50%;
+    padding: 13px;
+    font-weight: 800;
+}
+
+section { display: none; }
+section.active-page { display: block; }
+
+.welcome-section {
+    display: none;
+    background: linear-gradient(120deg,#211943,#17152c);
+    border: 1px solid var(--border);
+    padding: 45px;
+    border-radius: 20px;
+}
+
+.welcome-section.active-page { display: flex; }
+
+.welcome-section h1 { font-size: 42px; }
+.welcome-section h1 span { color: var(--purple2); }
+.welcome-art { font-size: 100px; margin: auto; }
+
+.eyebrow,
+.top-label {
+    color: var(--purple2);
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+}
+
+.section-heading { margin: 25px 0; }
+
+.section-heading h2 { font-size: 27px; }
+
+.section-heading p,
+.panel p,
+.service p,
+small {
+    color: var(--muted);
+}
+
+.panel,
+.service,
+.overview-card,
+.balance-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 23px;
+}
+
+.form-panel {
+    max-width: 850px;
+    margin: 25px auto;
+}
+
+.dashboard-grid,
+.service-grid {
+    display: grid;
+    grid-template-columns: repeat(3,minmax(0,1fr));
+    gap: 18px;
+    margin: 20px 0;
+}
+
+.service {
+    cursor: pointer;
+    transition: .2s;
+}
+
+.service:hover {
+    border-color: var(--purple2);
+    transform: translateY(-3px);
+}
+
+.service-icon,
+.overview-icon {
+    background: var(--card2);
+    padding: 12px;
+    display: inline-block;
+    border-radius: 12px;
+    font-size: 22px;
+}
+
+button {
+    border: none;
+    border-radius: 10px;
+    background: linear-gradient(100deg,var(--purple),var(--purple2));
+    color: white;
+    padding: 13px 19px;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 8px;
+}
+
+button:hover { filter: brightness(1.12); }
+
+.back-button { background: #30294e; }
+
+input, select, textarea {
+    width: 100%;
+    padding: 14px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: #101023;
+    color: white;
+    margin: 9px 0;
+    font-family: inherit;
+}
+
+.message {
+    margin-top: 15px;
+    color: #47dda8;
+    font-weight: 600;
+}
+
+.fingerprint-box {
+    margin: 18px 0;
+    padding: 18px;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    background: var(--card2);
+}
+
+.status-pill {
+    color: #38dca3;
+    background: #12352d;
+    padding: 10px 15px;
+    border-radius: 20px;
+}
+
+.hidden { display: none !important; }
+
+footer {
+    text-align: center;
+    color: var(--muted);
+    padding: 30px;
+}
+
+@media(max-width:950px) {
+    .sidebar { width: 210px; }
+    .main-content {
+        margin-left: 210px;
+        width: calc(100% - 210px);
+        padding: 20px;
+    }
+    .dashboard-grid,.service-grid {
+        grid-template-columns: repeat(2,1fr);
+    }
+}
+
+@media(max-width:650px) {
+    .sidebar {
+        position: relative;
+        width: 100%;
+        height: auto;
+    }
+    .app-layout { display: block; }
+    .main-content {
+        margin-left: 0;
+        width: 100%;
+        padding: 16px;
+    }
+    .dashboard-grid,.service-grid {
+        grid-template-columns: 1fr;
+    }
+    .welcome-section h1 { font-size: 29px; }
+    .welcome-art { display: none; }
+}
+</style>
+</head>
+
+<body>
+<div class="app-layout">
+
+<aside class="sidebar">
+
+    <div class="brand">
+        <div class="brand-icon">🏦</div>
+        <div>
+            <h2>SmartBank <span>AI</span></h2>
+            <small>Digital Banking</small>
+        </div>
+    </div>
+
+    <p class="eyebrow">MAIN MENU</p>
+
+    <nav class="sidebar-nav">
+        <a href="#home" class="nav-link" onclick="showPage('home')">🏠 Home</a>
+        <a href="#dashboard" class="nav-link" onclick="showPage('dashboard')">📊 Dashboard</a>
+        <a href="#services" class="nav-link" onclick="showPage('services')">💳 Services</a>
+        <a href="#transactions" class="nav-link" onclick="showPage('transactions')">📄 Transactions</a>
+        <a href="#about" class="nav-link" onclick="showPage('about')">ℹ️ About</a>
+        <a href="#contact" class="nav-link" onclick="showPage('contact')">📞 Contact</a>
+        <a href="#login" class="nav-link" onclick="showPage('login')">🔐 Login</a>
+    </nav>
+
+    <div class="support-card">
+        <h4>🤖 Smart AI Support</h4>
+        <p>Need banking assistance?</p>
+        <a href="#services" onclick="showPage('services')">Explore Services →</a>
+    </div>
+
+    <p class="sidebar-footer">© 2026 SmartBank AI</p>
+</aside>
+
+<main class="main-content">
+
+<header class="topbar">
+    <div>
+        <p class="top-label">SMARTBANK AI / OVERVIEW</p>
+        <h3>Digital Banking Dashboard</h3>
+    </div>
+
+    <div class="top-actions">
+        <span>🔒 Demo Banking</span>
+        <div class="profile-avatar">SB</div>
+        <button id="logoutButton" class="back-button hidden"
+                onclick="logoutUser()">Logout</button>
+    </div>
+</header>
+
+<!-- HOME -->
+<section id="home" class="welcome-section active-page">
+    <div>
+        <p class="eyebrow">WELCOME TO SMARTBANK AI</p>
+        <h1>Banking made <span>smarter.</span></h1>
+        <p>Manage your demo banking activities digitally.</p>
+        <button onclick="showPage('login')">Login to Continue →</button>
+        <button onclick="showPage('dashboard')">Open Dashboard</button>
+    </div>
+    <div class="welcome-art">🏦</div>
+</section>
+
+<!-- LOGIN -->
+<section id="login" class="content-section">
+    <div class="section-heading">
+        <p class="eyebrow">ACCOUNT ACCESS</p>
+        <h2>Customer Login</h2>
+        <p>Login to your SmartBank AI account.</p>
+    </div>
+
+    <div class="panel form-panel">
+        <h3>🔐 Secure Demo Login</h3>
+
+        <input id="username" placeholder="Enter Username">
+        <input id="password" type="password" placeholder="Enter Password">
+
+        <button onclick="loginUser()">Login</button>
+        <button onclick="showPage('register')">Create Account</button>
+        <button class="back-button" onclick="forgotPassword()">Forgot Password?</button>
+
+        <div class="fingerprint-box">
+            <h3>👆 Fingerprint Login</h3>
+            <p>Demo fingerprint authentication.</p>
+            <button onclick="fingerprintLogin()">Scan Fingerprint</button>
+            <p id="fingerprintMessage" class="message"></p>
+        </div>
+
+        <button class="back-button" onclick="showPage('home')">Back</button>
+        <p id="loginMessage" class="message"></p>
+    </div>
+</section>
+
+
+<!-- REGISTER -->
+<section id="register" class="content-section">
+    <div class="section-heading">
+        <h2>Create Demo Account</h2>
+    </div>
+
+    <div class="panel form-panel">
+
+        <input
+            id="regName"
+            type="text"
+            placeholder="Enter Full Name"
+            required
+        >
+
+        <input
+            id="regEmail"
+            type="email"
+            placeholder="Enter Email Address"
+            required
+        >
+
+        <input
+            id="regUsername"
+            type="text"
+            placeholder="Create Username"
+            required
+        >
+
+        <input
+            id="regPassword"
+            type="password"
+            placeholder="Create Password"
+            required
+        >
+
+        <input
+            id="regConfirmPassword"
+            type="password"
+            placeholder="Confirm Password"
+            required
+        >
+
+        <button type="button" onclick="registerUser()">
+            Register
+        </button>
+
+        <button
+            type="button"
+            class="back-button"
+            onclick="showPage('login')">
+            Back to Login
+        </button>
+
+        <p id="registerMessage" class="message"></p>
+
+    </div>
+</section>
+
+
+<!-- DASHBOARD -->
+<section id="dashboard" class="content-section">
+    <div class="section-heading">
+        <p class="eyebrow">ACCOUNT OVERVIEW</p>
+        <h2>Customer Dashboard</h2>
+        <p>Welcome to SmartBank AI!</p>
+        <span class="status-pill">● System Active</span>
+    </div>
+
+    <div class="dashboard-grid">
+        <div class="balance-card">
+            <p>Total Demo Account Balance</p>
+            <h1 id="accountBalance">₹25,000</h1>
+            <small>Demo balance only</small>
+        </div>
+
+        <div class="overview-card">
+            <div class="overview-icon">💳</div>
+            <p>ATM Card</p>
+            <h3 id="cardStatus">Active</h3>
+        </div>
+
+        <div class="overview-card">
+            <div class="overview-icon">🔒</div>
+            <p>Account Status</p>
+            <h3 id="accountStatus">Active</h3>
+        </div>
+    </div>
+
+    <div class="panel">
+        <h3>⚡ Quick Banking Actions</h3>
+
+        <div class="service-grid">
+            <div class="service" onclick="showPage('accountSecurityPage')">
+                🔒 <h3>Account Security</h3>
+                <p>Lock or unlock account</p>
+            </div>
+
+            <div class="service" onclick="showPage('atmCardPage')">
+                💳 <h3>ATM Card</h3>
+                <p>Apply for a card</p>
+            </div>
+
+            <div class="service" onclick="showPage('mobilePage')">
+                📱 <h3>Mobile Update</h3>
+                <p>Update mobile</p>
+            </div>
+
+            <div class="service" onclick="showPage('addressPage')">
+                🏠 <h3>Address Update</h3>
+                <p>Change address</p>
+            </div>
+
+            <div class="service" onclick="showPage('paymentPage')">
+                💸 <h3>Send Money</h3>
+                <p>Demo payment</p>
+            </div>
+
+            <div class="service" onclick="showPage('statementPage')">
+                📄 <h3>Statement</h3>
+                <p>View statement</p>
+            </div>
+
+            <div class="service" onclick="showPage('pinPage')">
+                🔑 <h3>ATM PIN</h3>
+                <p>Change PIN</p>
+            </div>
+
+            <div class="service" onclick="showPage('newAccountPage')">
+                🏦 <h3>New Account</h3>
+                <p>Apply for account</p>
+            </div>
+
+            <div class="service" onclick="showPage('kycPage')">
+                🪪 <h3>KYC Verification</h3>
+                <p>Demo verification</p>
+            </div>
+
+            <div class="service" onclick="showPage('notificationsPage')">
+                🔔 <h3>Notifications</h3>
+                <p>View alerts</p>
+            </div>
+
+            <div class="service" onclick="showPage('chatPage')">
+                🤖 <h3>AI Chatbot</h3>
+                <p>Ask questions</p>
+            </div>
+
+            <div class="service" onclick="showPage('transactions')">
+                📊 <h3>Transactions</h3>
+                <p>View activity</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- BANKING SERVICES -->
+<section id="services" class="content-section">
+    <div class="section-heading">
+        <h2>Our Banking Services</h2>
+    </div>
+    <div class="service-grid">
+        <div class="service" onclick="showPage('accountSecurityPage')">🔒 Account Security</div>
+        <div class="service" onclick="showPage('atmCardPage')">💳 ATM Card</div>
+        <div class="service" onclick="showPage('mobilePage')">📱 Mobile Update</div>
+        <div class="service" onclick="showPage('addressPage')">🏠 Address Update</div>
+        <div class="service" onclick="showPage('paymentPage')">💸 Money Transfer</div>
+        <div class="service" onclick="showPage('statementPage')">📄 Statement</div>
+    </div>
+</section>
+
+<!-- ACCOUNT SECURITY -->
+<section id="accountSecurityPage" class="content-section">
+    <div class="panel form-panel">
+        <button class="back-button" onclick="showPage('dashboard')">← Back</button>
+        <h2>🔒 Account Security</h2>
+        <input id="securityName" placeholder="Customer Name">
+        <input id="securityAccount" placeholder="Demo Account Reference">
+        <select id="securityAction">
+            <option value="">Select Action</option>
+            <option value="Lock">Lock Account</option>
+            <option value="Unlock">Unlock Account</option>
+        </select>
+        <textarea id="securityReason" placeholder="Reason"></textarea>
+        <button onclick="submitSecurityRequest()">Submit Request</button>
+        <p id="securityMessage" class="message"></p>
+    </div>
+</section>
+
+<!-- ATM CARD -->
+<section id="atmCardPage" class="content-section">
+    <div class="panel form-panel">
+        <button class="back-button" onclick="showPage('dashboard')">← Back</button>
+        <h2>💳 ATM Card Application</h2>
+        <input id="cardName" placeholder="Customer Name">
+        <select id="cardType">
+            <option value="">Select Card Type</option>
+            <option>Classic Debit Card</option>
+            <option>Platinum Debit Card</option>
+        </select>
+        <button onclick="applyCard()">Submit Application</button>
+        <p id="cardMessage" class="message"></p>
+    </div>
+</section>
+
+<!-- MOBILE -->
+<section id="mobilePage" class="content-section">
+    <div class="panel form-panel">
+        <button class="back-button" onclick="showPage('dashboard')">← Back</button>
+        <h2>📱 Mobile Number Update</h2>
+        <input id="mobileNumber" placeholder="Demo Mobile Number">
+        <button onclick="updateMobile()">Submit Update</button>
+        <p id="mobileMessage" class="message"></p>
+    </div>
+</section>
+
+<!-- ADDRESS -->
+<section id="addressPage" class="content-section">
+    <div class="panel form-panel">
+        <button class="back-button" onclick="showPage('dashboard')">← Back</button>
+        <h2>🏠 Address Update</h2>
+        <textarea id="newAddress" placeholder="Enter Address"></textarea>
+        <input id="addressCity" placeholder="City">
+        <input id="addressPin" placeholder="PIN Code">
+        <button onclick="updateAddress()">Submit Request</button>
+        <p id="addressMessage" class="message"></p>
+    </div>
+</section>
+
+<!-- PAYMENT -->
+<section id="paymentPage" class="content-section">
+    <div class="panel form-panel">
+        <button class="back-button" onclick="showPage('dashboard')">← Back</button>
+        <h2>💸 Send Money</h2>
+        <input id="receiverName" placeholder="Receiver Name">
+        <input id="receiverUPI" placeholder="Demo UPI ID">
+        <input id="transferAmount" type="number" placeholder="Amount">
+        <button onclick="transferMoney()">Pay Now</button>
+        <p id="transferMessage" class="message"></p>
+        <div id="receiptResult"></div>
+    </div>
+</section>
+
+<!-- STATEMENT -->
+<section id="statementPage" class="content-section">
+    <div class="panel form-panel">
+        <button class="back-button" onclick="showPage('dashboard')">← Back</button>
+        <h2>📄 Bank Statement</h2>
+        <button onclick="viewStatement()">View Statement</button>
+        <div id="statementResult"></div>
+    </div>
+</section>
+
+<!-- PIN -->
+<section id="pinPage" class="content-section">
+    <div class="panel form-panel">
+        <button class="back-button" onclick="showPage('dashboard')">← Back</button>
+        <h2>🔑 ATM PIN</h2>
+        <input id="demoPin" type="password" maxlength="4" placeholder="Enter 4-digit Demo PIN">
+        <button onclick="generatePin()">Change PIN</button>
+        <p id="pinMessage" class="message"></p>
+    </div>
+</section>
+
+<!-- NEW ACCOUNT -->
+<section id="newAccountPage" class="content-section">
+    <div class="panel form-panel">
+        <button class="back-button" onclick="showPage('dashboard')">← Back</button>
+        <h2>🏦 New Account</h2>
+        <input id="customerName" placeholder="Customer Name">
+        <select id="accountType">
+            <option value="">Select Account Type</option>
+            <option>Savings Account</option>
+            <option>Current Account</option>
+        </select>
+        <button onclick="openAccount()">Submit Application</button>
+        <p id="accountMessage" class="message"></p>
+    </div>
+</section>
+
+<!-- KYC -->
+<section id="kycPage" class="content-section">
+    <div class="panel form-panel">
+        <button class="back-button" onclick="showPage('dashboard')">← Back</button>
+        <h2>🪪 KYC Verification</h2>
+        <input id="kycName" placeholder="Customer Name">
+        <select id="kycDocument">
+            <option value="">Select Document</option>
+            <option>Demo Aadhaar</option>
+            <option>Demo PAN</option>
+            <option>Demo Voter ID</option>
+        </select>
+        <button onclick="verifyKYC()">Submit Verification</button>
+        <p id="kycMessage" class="message"></p>
+    </div>
+</section>
+
+<!-- NOTIFICATIONS -->
+<section id="notificationsPage" class="content-section">
+    <div class="panel form-panel">
+        <button class="back-button" onclick="showPage('dashboard')">← Back</button>
+        <h2>🔔 Notifications</h2>
+        <button onclick="showNotifications()">View Notifications</button>
+        <div id="notificationMessage"></div>
+    </div>
+</section>
+
+<!-- CHATBOT -->
+<section id="chatPage" class="content-section">
+    <div class="panel form-panel">
+        <button class="back-button" onclick="showPage('dashboard')">← Back</button>
+        <h2>🤖 SmartBank AI Chatbot</h2>
+        <input id="chatQuestion" placeholder="Ask a banking question">
+        <button onclick="chatBot()">Ask AI</button>
+        <p id="chatAnswer" class="message"></p>
+    </div>
+</section>
+
+<!-- TRANSACTIONS -->
+<section id="transactions" class="content-section">
+    <div class="panel form-panel">
+        <h2>📊 Transaction History</h2>
+        <button onclick="showTransactions()">View Transactions</button>
+        <div id="transactionHistory"></div>
+    </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="content-section">
+    <div class="panel form-panel">
+        <h2>About SmartBank AI</h2>
+        <p>SmartBank AI is a student demo project for digital banking workflows.</p>
+    </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="content-section">
+    <div class="panel form-panel">
+        <h2>Contact Us</h2>
+        <p>support@smartbank.demo</p>
+    </div>
+</section>
+
+<footer>
+    © 2026 SmartBank AI | Student Demo Project
+</footer>
+
+</main>
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<meta name="theme-color" content="#10101f">
+
+<meta name="description"
+      content="SmartBank AI - Self Service Banking Demo">
+
+<link rel="manifest" href="./manifest.json">
+
+<link rel="icon"
+      href="./icons/smartbank-icon.svg"
+      type="image/svg+xml">
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
